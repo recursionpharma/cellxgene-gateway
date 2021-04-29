@@ -23,6 +23,7 @@ from flask import (
     url_for,
 )
 from flask_api import status
+from more_click import run_app
 from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.utils import secure_filename
 
@@ -282,7 +283,12 @@ def launch():
     background_thread.start()
 
     app.launchtime = current_time_stamp()
-    app.run(host="0.0.0.0", port=env.gateway_port, debug=False)
+    run_app(app=server.app,
+            with_gunicorn=True,
+            host="0.0.0.0",
+            port=env.gateway_port,
+            workers=8,
+            )
 
 
 def main():
