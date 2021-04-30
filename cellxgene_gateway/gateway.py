@@ -283,7 +283,7 @@ def launch():
     background_thread.start()
 
     app.launchtime = current_time_stamp()
-    run_app(app=server.app,
+    run_app(app=app,
             with_gunicorn=True,
             host="0.0.0.0",
             port=env.gateway_port,
